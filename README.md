@@ -4,7 +4,7 @@ I built this to answer a question I kept seeing argued about without any chart t
 
 It's a small dashboard that compares daily vessel transits through the Strait of Hormuz against the price of Brent crude. The part I'm most pleased with is that it needs nothing from me once it's running. No server, no database, no API key I have to guard. A scheduled GitHub Action wakes up once a day, pulls both data sources fresh, rebuilds the page, and commits the result back to this repo. I just check in on it occasionally.
 
-**Live page:** once you turn on GitHub Pages (steps below), it'll sit at `https://eshaaalali.github.io/hormuz-watch/`
+**Live page:** once you turn on GitHub Pages (steps below), it'll sit at [Hormuz Watch](https://eshaaalali.github.io/hormuz-watch/)
 
 ## How it actually works
 
