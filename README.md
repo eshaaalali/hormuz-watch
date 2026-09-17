@@ -1,61 +1,64 @@
 # Hormuz Watch
 
-A small dashboard comparing daily Strait of Hormuz vessel transits against Brent
-crude oil price. It refreshes itself once a day with no server, no database and
-no API key — a scheduled GitHub Action re-pulls both public data sources,
-rebuilds `index.html`, and commits it back to the repo.
+I built this to answer a question I kept seeing argued about without any chart to back it up: does oil traffic through the Strait of Hormuz actually move with the price of oil, day by day, during the current crisis? So I put the two series next to each other and let them speak for themselves.
 
-**Live page:** enable GitHub Pages (see below) and it'll be at
-`https://<your-username>.github.io/<repo-name>/`
+It's a small dashboard that compares daily vessel transits through the Strait of Hormuz against the price of Brent crude. The part I'm most pleased with is that it needs nothing from me once it's running. No server, no database, no API key I have to guard. A scheduled GitHub Action wakes up once a day, pulls both data sources fresh, rebuilds the page, and commits the result back to this repo. I just check in on it occasionally.
 
-## How the auto-refresh works
+**Live page:** once you turn on GitHub Pages (steps below), it'll sit at `https://<your username>.github.io/<repo name>/`
 
-- `scripts/refresh_data.py` pulls:
-  - **Vessel transits** from [IMF PortWatch](https://portwatch.imf.org/pages/chokepoint6) (chokepoint6 = Strait of Hormuz), a free ArcGIS-hosted dataset, no key needed.
-  - **Brent crude price** from [FRED series DCOILBRENTEU](https://fred.stlouisfed.org/series/DCOILBRENTEU) (sourced from the US EIA), a free CSV endpoint, no key needed.
-- It merges the two by date, keeps the most recent 120 days, and writes `data/combined.json` + a rebuilt `index.html`.
-- `.github/workflows/refresh.yml` runs that script every day at 06:00 UTC and pushes the result if anything changed. You can also trigger it on demand from the repo's **Actions** tab → "Refresh Hormuz Watch" → **Run workflow**.
+## How it actually works
 
-No secrets or API keys are required — the workflow's built-in `GITHUB_TOKEN` is enough to commit.
+Every day, `scripts/refresh_data.py` goes out and gets two things:
 
-## Setting it up
+* Vessel transit counts from [IMF PortWatch](https://portwatch.imf.org/pages/chokepoint6), which tracks the Strait of Hormuz (their chokepoint6) using AIS ship transponder data. It's free and needs no key.
+* Brent crude prices from [FRED series DCOILBRENTEU](https://fred.stlouisfed.org/series/DCOILBRENTEU), which is the US EIA's own data, made available through the Federal Reserve. Also free, also no key.
 
-1. **Create a repo** on GitHub (public or private both work for the Action; Pages needs it either public, or private on a paid plan).
-2. **Push these files** to it:
+The script lines the two up by date, keeps the most recent 120 days, and writes out `data/combined.json` along with a freshly rebuilt `index.html`. Then `.github/workflows/refresh.yml`, the GitHub Action, runs that script every day at 06:00 UTC and pushes whatever changed. If you ever want to see it happen on demand rather than waiting for the schedule, you can trigger it yourself from the repo's Actions tab under "Refresh Hormuz Watch," then "Run workflow."
+
+Nothing here needs a secret or an API key. The workflow's own built in `GITHUB_TOKEN` is enough for it to commit on my behalf.
+
+## Setting it up yourself
+
+If you want to run your own copy, here's what I did:
+
+1. Create a new repo on GitHub. Public or private both work for the Action itself; Pages needs the repo to be public, unless you're on a paid GitHub plan.
+2. Push the project files into it:
    ```
    git init
    git add .
    git commit -m "Hormuz Watch: initial commit"
    git branch -M main
-   git remote add origin https://github.com/<your-username>/<repo-name>.git
+   git remote add origin https://github.com/<your username>/<repo name>.git
    git push -u origin main
    ```
-3. **Turn on GitHub Pages**: repo → Settings → Pages → Source → "Deploy from a branch" → Branch `main`, folder `/ (root)`. Save.
-4. **Turn on Actions** if it isn't already (Settings → Actions → General → allow workflows to run).
-5. Wait for the first scheduled run, or trigger it manually (Actions tab → Refresh Hormuz Watch → Run workflow) to confirm it works end to end.
+
+3. Turn on GitHub Pages: go to the repo's Settings, then Pages, set Source to "Deploy from a branch," pick branch `main` and folder `/ (root)`, and save.
+4. Make sure Actions are allowed to run for the repo (Settings, then Actions, then General).
+5. Either wait for the first scheduled run, or trigger it yourself from the Actions tab to confirm everything works end to end.
 
 ## Putting it on your GitHub profile
 
-If `<repo-name>` matches your GitHub username exactly, its `README.md` renders
-directly on your profile page — that's the "special" profile-README repo
-GitHub supports. Otherwise, link to this repo or its Pages URL from your
-profile README, e.g.:
+If you name the repo exactly the same as your GitHub username, its README renders straight onto your profile page automatically, which is a neat trick GitHub supports. Otherwise, I'd just link to the repo or its Pages URL from wherever your profile README already lives, something like:
 
 ```markdown
-### 🛢️ [Hormuz Watch](https://<your-username>.github.io/<repo-name>/)
-Daily Strait of Hormuz vessel transits vs. Brent crude, refreshed automatically.
+### 🛢️ [Hormuz Watch](https://<your username>.github.io/<repo name>/)
+Daily Strait of Hormuz vessel transits versus Brent crude, refreshed automatically.
 ```
 
-## Files
+## What's in here
 
-- `index.html` — the page (rebuilt automatically; safe to regenerate, don't hand-edit the `DATA` array).
-- `scripts/template.html` — the actual template with layout/CSS/JS; edit this if you want to change how the page looks.
-- `scripts/refresh_data.py` — the fetch/merge/build script.
-- `data/combined.json` — the current dataset (also rebuilt automatically).
-- `.github/workflows/refresh.yml` — the daily schedule.
+* `index.html`, the page itself. It gets rebuilt automatically, so it's safe to regenerate; I'd avoid hand editing the `DATA` array inside it.
+* `scripts/template.html`, the actual template with the layout, styling, and behavior. This is the file to edit if you want the page to look or work differently.
+* `scripts/refresh_data.py`, the script that fetches, merges, and rebuilds everything.
+* `data/combined.json`, the current dataset, also rebuilt automatically.
+* `.github/workflows/refresh.yml`, the daily schedule that ties it all together.
 
-## Notes on the data
+## Being honest about the data
 
-- Transit counts are AIS-based estimates from PortWatch across all cargo types (tanker, dry bulk, container, general cargo, ro-ro); "tankers" is the tanker-type subset. PortWatch itself warns that AIS spoofing and vessels "going dark" during the current conflict make these a floor, not a ceiling.
-- Every price point is a real reported FRED quote — weekends/holidays with no quote are simply skipped rather than estimated.
-- The five timeline entries in the page (strikes, price peaks, etc.) are hand-curated from news reporting at build time and will silently drop off the timeline once they roll outside the 120-day window — that's expected, not a bug.
+A few things I think are worth knowing before you trust any single number on this page:
+
+Transit counts are AIS based estimates from PortWatch, covering every kind of cargo vessel (tanker, dry bulk, container, general cargo, and ro-ro). "Tankers" refers specifically to the tanker subset of that count. PortWatch itself is upfront that AIS spoofing and vessels going dark during the current conflict mean these numbers are a floor, not a ceiling, on real traffic.
+
+Every price point on this page is a real, reported FRED quote. I didn't estimate or interpolate anything. Weekends and holidays simply don't have a quote, so those dates are skipped rather than guessed at.
+
+The five timeline entries on the page (the strikes, the price peaks, and so on) are events I hand curated from news reporting when I built this. As the rolling 120 day window moves forward, they'll quietly drop off once they age out of range. That's expected behavior, not a bug.
