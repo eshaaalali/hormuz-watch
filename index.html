@@ -5,6 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hormuz Watch</title>
 <meta name="description" content="Daily Strait of Hormuz vessel transits vs Brent crude price, auto-refreshed daily from IMF PortWatch and FRED.">
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="canonical" href="https://eshaaalali.github.io/hormuz-watch-repo/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hormuz Watch">
+<meta property="og:title" content="Hormuz Watch">
+<meta property="og:description" content="Daily Strait of Hormuz vessel transits vs Brent crude price, auto-refreshed daily from IMF PortWatch and FRED.">
+<meta property="og:url" content="https://eshaaalali.github.io/hormuz-watch-repo/">
+<meta property="og:image" content="https://eshaaalali.github.io/hormuz-watch-repo/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hormuz Watch">
+<meta name="twitter:description" content="Daily Strait of Hormuz vessel transits vs Brent crude price, auto-refreshed daily.">
+<meta name="twitter:image" content="https://eshaaalali.github.io/hormuz-watch-repo/og-image.png">
+
 <style>
   :root{
     --ink:#12100b;
@@ -245,7 +265,7 @@
 <div class="wrap">
 
   <header class="top">
-    <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> Chokepoint monitor &middot; auto-refreshed daily via GitHub Actions &middot; last updated 2026-09-19 20:09 UTC</div>
+    <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> Chokepoint monitor &middot; auto-refreshed daily via GitHub Actions &middot; last updated 2026-09-19 21:32 UTC</div>
     <h1 class="title">Hormuz Watch</h1>
     <p class="subhead">Daily vessel transits through the Strait of Hormuz, charted against Brent crude, over a rolling 77-day window. Roughly a fifth of the world's oil passes through this 33&nbsp;km gap between Iran and Oman &mdash; when transits fall, this is where it shows first.</p>
 
@@ -319,7 +339,7 @@
     <h3>Notes</h3>
     <p>Transit counts are IMF PortWatch's AIS-based estimate of vessels passing through the chokepoint boundary that day, across all cargo types (tanker, dry bulk, container, general cargo, ro-ro). "Tankers" is the subset identified as tanker-type vessels. Correlation is computed on the window shown, price vs. total transits, and is not evidence of causation on its own.</p>
     <h3>How I built this</h3>
-    <p>I put this together to see whether Hormuz traffic and oil price actually move together, day by day, rather than just arguing about it.</p>
+    <p>I put this together to see whether Hormuz traffic and oil price actually move together, day by day, rather than just arguing about it. Everything here runs on free, public sources and tools &mdash; no paid data, no backend, no database &mdash; just a scheduled script re-pulling official IMF and US EIA figures and committing the result.</p>
   </footer>
 
 </div>
@@ -523,6 +543,10 @@
     }
 
     var vBarW = Math.max(view==="day"?1.6:6, (innerW/vN)*(view==="day"?0.55:0.5));
+    // Cap width so bars centered on the leftmost/rightmost tick never spill
+    // past the plot area into the axis-label margin (visible with few buckets,
+    // e.g. Month view with only 3-4 bars).
+    vBarW = Math.min(vBarW, 2*Math.min(margin.left, margin.right) - 6);
     var baseline = transitH - margin.bottom;
     vData.forEach(function(d,i){
       var x = vXAt(i) - vBarW/2;

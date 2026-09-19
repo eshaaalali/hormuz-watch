@@ -1,0 +1,541 @@
+[
+ {
+  "date": "2026-06-29",
+  "transits": 39,
+  "tankers": 13,
+  "brent": 73.21,
+  "brentReal": true
+ },
+ {
+  "date": "2026-06-30",
+  "transits": 26,
+  "tankers": 6,
+  "brent": 73.57,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-01",
+  "transits": 40,
+  "tankers": 18,
+  "brent": 73.94,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-02",
+  "transits": 41,
+  "tankers": 15,
+  "brent": 74.3,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-03",
+  "transits": 31,
+  "tankers": 17,
+  "brent": 74.66,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-04",
+  "transits": 26,
+  "tankers": 8,
+  "brent": 75.03,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-05",
+  "transits": 28,
+  "tankers": 16,
+  "brent": 75.39,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-06",
+  "transits": 34,
+  "tankers": 16,
+  "brent": 75.75,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-07",
+  "transits": 42,
+  "tankers": 10,
+  "brent": 76.12,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-08",
+  "transits": 32,
+  "tankers": 8,
+  "brent": 76.48,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-09",
+  "transits": 17,
+  "tankers": 3,
+  "brent": 77.82,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-10",
+  "transits": 10,
+  "tankers": 4,
+  "brent": 79.16,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-11",
+  "transits": 9,
+  "tankers": 3,
+  "brent": 80.5,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-12",
+  "transits": 7,
+  "tankers": 1,
+  "brent": 81.84,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-13",
+  "transits": 18,
+  "tankers": 2,
+  "brent": 83.18,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-14",
+  "transits": 11,
+  "tankers": 5,
+  "brent": 84.52,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-15",
+  "transits": 15,
+  "tankers": 3,
+  "brent": 85.86,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-16",
+  "transits": 11,
+  "tankers": 1,
+  "brent": 87.21,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-17",
+  "transits": 1,
+  "tankers": 1,
+  "brent": 88.55,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-18",
+  "transits": 10,
+  "tankers": 2,
+  "brent": 89.89,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-19",
+  "transits": 6,
+  "tankers": 2,
+  "brent": 91.23,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-20",
+  "transits": 8,
+  "tankers": 2,
+  "brent": 92.57,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-21",
+  "transits": 11,
+  "tankers": 1,
+  "brent": 93.91,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-22",
+  "transits": 11,
+  "tankers": 1,
+  "brent": 95.25,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-23",
+  "transits": 0,
+  "tankers": 0,
+  "brent": 96.59,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-24",
+  "transits": 6,
+  "tankers": 0,
+  "brent": 97.93,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-25",
+  "transits": 4,
+  "tankers": 0,
+  "brent": 97.49,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-26",
+  "transits": 4,
+  "tankers": 2,
+  "brent": 97.05,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-27",
+  "transits": 10,
+  "tankers": 0,
+  "brent": 96.6,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-28",
+  "transits": 9,
+  "tankers": 1,
+  "brent": 96.16,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-29",
+  "transits": 11,
+  "tankers": 3,
+  "brent": 95.72,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-30",
+  "transits": 7,
+  "tankers": 1,
+  "brent": 95.28,
+  "brentReal": true
+ },
+ {
+  "date": "2026-07-31",
+  "transits": 14,
+  "tankers": 2,
+  "brent": 94.84,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-01",
+  "transits": 7,
+  "tankers": 3,
+  "brent": 94.39,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-02",
+  "transits": 6,
+  "tankers": 0,
+  "brent": 93.95,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-03",
+  "transits": 9,
+  "tankers": 3,
+  "brent": 93.51,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-04",
+  "transits": 10,
+  "tankers": 4,
+  "brent": 93.07,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-05",
+  "transits": 10,
+  "tankers": 0,
+  "brent": 92.62,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-06",
+  "transits": 4,
+  "tankers": 0,
+  "brent": 92.18,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-07",
+  "transits": 8,
+  "tankers": 4,
+  "brent": 91.74,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-08",
+  "transits": 18,
+  "tankers": 2,
+  "brent": 91.3,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-09",
+  "transits": 6,
+  "tankers": 0,
+  "brent": 90.86,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-10",
+  "transits": 6,
+  "tankers": 2,
+  "brent": 90.41,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-11",
+  "transits": 16,
+  "tankers": 2,
+  "brent": 89.97,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-12",
+  "transits": 5,
+  "tankers": 1,
+  "brent": 89.53,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-13",
+  "transits": 10,
+  "tankers": 2,
+  "brent": 89.75,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-14",
+  "transits": 12,
+  "tankers": 2,
+  "brent": 89.96,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-15",
+  "transits": 1,
+  "tankers": 1,
+  "brent": 90.18,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-16",
+  "transits": 1,
+  "tankers": 1,
+  "brent": 90.4,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-17",
+  "transits": 5,
+  "tankers": 3,
+  "brent": 90.61,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-18",
+  "transits": 8,
+  "tankers": 4,
+  "brent": 90.83,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-19",
+  "transits": 8,
+  "tankers": 4,
+  "brent": 91.05,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-20",
+  "transits": 8,
+  "tankers": 2,
+  "brent": 91.26,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-21",
+  "transits": 6,
+  "tankers": 2,
+  "brent": 91.48,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-22",
+  "transits": 13,
+  "tankers": 1,
+  "brent": 91.7,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-23",
+  "transits": 5,
+  "tankers": 1,
+  "brent": 91.91,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-24",
+  "transits": 4,
+  "tankers": 2,
+  "brent": 92.13,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-25",
+  "transits": 4,
+  "tankers": 4,
+  "brent": 85.89,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-26",
+  "transits": 8,
+  "tankers": 2,
+  "brent": 86.56,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-27",
+  "transits": 2,
+  "tankers": 2,
+  "brent": 88.63,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-28",
+  "transits": 14,
+  "tankers": 0,
+  "brent": 88.29,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-29",
+  "transits": 5,
+  "tankers": 1,
+  "brent": 88.1,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-30",
+  "transits": 10,
+  "tankers": 2,
+  "brent": 89.69,
+  "brentReal": true
+ },
+ {
+  "date": "2026-08-31",
+  "transits": 5,
+  "tankers": 1,
+  "brent": 88.58,
+  "brentReal": true
+ },
+ {
+  "date": "2026-09-01",
+  "transits": 7,
+  "tankers": 1,
+  "brent": 95.26,
+  "brentReal": true
+ },
+ {
+  "date": "2026-09-02",
+  "transits": 5,
+  "tankers": 1,
+  "brent": 95.3,
+  "brentReal": true
+ },
+ {
+  "date": "2026-09-03",
+  "transits": 3,
+  "tankers": 1,
+  "brent": 95.93,
+  "brentReal": true
+ },
+ {
+  "date": "2026-09-04",
+  "transits": 4,
+  "tankers": 0,
+  "brent": 95.83,
+  "brentReal": true
+ },
+ {
+  "date": "2026-09-05",
+  "transits": 4,
+  "tankers": 0,
+  "brent": 96.28,
+  "brentReal": true
+ },
+ {
+  "date": "2026-09-06",
+  "transits": 10,
+  "tankers": 2,
+  "brent": 96.28,
+  "brentReal": true
+ },
+ {
+  "date": "2026-09-07",
+  "transits": 8,
+  "tankers": 2,
+  "brent": 97.22,
+  "brentReal": true
+ },
+ {
+  "date": "2026-09-08",
+  "transits": 10,
+  "tankers": 2,
+  "brent": 99.39,
+  "brentReal": true
+ },
+ {
+  "date": "2026-09-09",
+  "transits": 6,
+  "tankers": 0,
+  "brent": 102.09,
+  "brentReal": true
+ },
+ {
+  "date": "2026-09-10",
+  "transits": 9,
+  "tankers": 1,
+  "brent": 108.73,
+  "brentReal": true
+ },
+ {
+  "date": "2026-09-11",
+  "transits": 13,
+  "tankers": 3,
+  "brent": 104.42,
+  "brentReal": true
+ },
+ {
+  "date": "2026-09-12",
+  "transits": 3,
+  "tankers": 1,
+  "brent": 104.61,
+  "brentReal": true
+ },
+ {
+  "date": "2026-09-13",
+  "transits": 15,
+  "tankers": 1,
+  "brent": 107.62,
+  "brentReal": true
+ }
+]
