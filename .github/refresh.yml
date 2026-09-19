@@ -1,0 +1,59 @@
+name: Refresh Hormuz Watch
+
+on:
+  schedule:
+    # 06:00 UTC daily (11:00 Asia/Karachi). IMF PortWatch and FRED both
+    # publish once a day, so more frequent runs would just find nothing new.
+    - cron: "0 6 * * *"
+  workflow_dispatch: {}   # lets you trigger a refresh manually from the Actions tab
+
+permissions:
+  contents: write
+  issues: write   # needed so the workflow can open an issue on repeated failures
+
+concurrency:
+  group: refresh-hormuz-watch
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Pull latest data and rebuild the page
+        run: python scripts/refresh_data.py
+
+      - name: Commit and push if the site changed
+        run: |
+          git config user.name "hormuz-watch-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No changes to commit."
+          else
+            git add index.html
+            git add data/*.json
+            git commit -m "Daily refresh: $(date -u +'%Y-%m-%d')"
+            git push
+          fi
+
+      - name: Flag repeated data-source failures
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          FAILS=$(python -c "import json;print(json.load(open('data/status.json')).get('consecutive_failures',0))")
+          echo "consecutive_failures=$FAILS"
+          if [ "$FAILS" -ge 3 ]; then
+            EXISTING=$(gh issue list --search "Hormuz Watch data fetch failing in:title" --state open --json number --jq '.[0].number')
+            if [ -z "$EXISTING" ]; then
+              gh issue create \
+                --title "Hormuz Watch data fetch failing" \
+                --body "The daily refresh has failed to fetch fresh data for $FAILS consecutive runs. Check the Actions log for IMF PortWatch / FRED errors. The page is still serving the last known-good data in the meantime."
+            else
+              gh issue comment "$EXISTING" --body "Still failing — $FAILS consecutive runs as of $(date -u +'%Y-%m-%d %H:%M UTC')."
+            fi
+          fi
