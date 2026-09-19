@@ -9,8 +9,10 @@ Sources (both free, no API key required):
     (Europe Brent Spot Price FOB, $/barrel), sourced from the US EIA.
 
 Run with: python scripts/refresh_data.py
-Exits with code 0 always; writes data/combined.json and index.html only if
-something changed, and prints a one-line summary either way.
+Exits with code 0 always. index.html is rebuilt from the current template on
+EVERY run (so template edits and the "last updated" timestamp always show up),
+even on days the two sources haven't published anything new. data/combined.json
+is only rewritten when the fetched data actually differs from what's stored.
 """
 import csv
 import io
@@ -112,6 +114,16 @@ def build_combined(transits, brent):
     return rows
 
 
+def load_old_rows():
+    if not os.path.exists(DATA_PATH):
+        return []
+    try:
+        with open(DATA_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return []
+
+
 def render_index(rows):
     with open(TEMPLATE_PATH, "r", encoding="utf-8") as f:
         tpl = f.read()
@@ -124,47 +136,44 @@ def render_index(rows):
 
 
 def main():
+    old_rows = load_old_rows()
+    rows = old_rows
+    note = "no new data fetched"
+
     try:
         transits = fetch_transits()
-    except Exception as e:
-        print("refresh: could not fetch IMF PortWatch data (%s); leaving site unchanged." % e)
-        return 0
-    try:
         brent = fetch_brent()
+        fetched_rows = build_combined(transits, brent)
+        if fetched_rows:
+            rows = fetched_rows
+            note = "fetched OK"
+        else:
+            note = "fetch returned no overlapping dates; kept previous data"
     except Exception as e:
-        print("refresh: could not fetch FRED Brent data (%s); leaving site unchanged." % e)
-        return 0
+        note = "fetch failed (%s); kept previous data" % e
 
-    rows = build_combined(transits, brent)
     if not rows:
-        print("refresh: no overlapping dates between sources; leaving site unchanged.")
+        # Nothing fetched and nothing stored yet — genuinely nothing to build.
+        print("refresh: no data available yet (%s); index.html not built." % note)
         return 0
 
-    old_rows = []
-    if os.path.exists(DATA_PATH):
-        try:
-            with open(DATA_PATH, "r", encoding="utf-8") as f:
-                old_rows = json.load(f)
-        except Exception:
-            old_rows = []
+    # Only rewrite combined.json when the data actually changed.
+    if rows != old_rows:
+        os.makedirs(os.path.dirname(DATA_PATH), exist_ok=True)
+        with open(DATA_PATH, "w", encoding="utf-8") as f:
+            json.dump(rows, f, indent=1)
+            f.write("\n")
 
-    if rows == old_rows:
-        print("refresh: no new data since last run (latest %s). No changes made." % rows[-1]["date"])
-        return 0
-
-    os.makedirs(os.path.dirname(DATA_PATH), exist_ok=True)
-    with open(DATA_PATH, "w", encoding="utf-8") as f:
-        json.dump(rows, f, indent=1)
-        f.write("\n")
-
+    # Always rebuild index.html — picks up template edits and a fresh
+    # "last updated" timestamp even when the underlying data is unchanged.
     html = render_index(rows)
     with open(INDEX_PATH, "w", encoding="utf-8") as f:
         f.write(html)
 
     last = rows[-1]
     print(
-        "refresh: updated through %s — %d transits (%d tankers), Brent $%.2f. %d days in window."
-        % (last["date"], last["transits"], last["tankers"], last["brent"], len(rows))
+        "refresh: %s. Page rebuilt through %s — %d transits (%d tankers), Brent $%.2f. %d days in window."
+        % (note, last["date"], last["transits"], last["tankers"], last["brent"], len(rows))
     )
     return 0
 
