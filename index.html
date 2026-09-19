@@ -245,7 +245,7 @@
 <div class="wrap">
 
   <header class="top">
-    <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> Chokepoint monitor &middot; auto-refreshed daily via GitHub Actions &middot; last updated 2026-09-17 21:07 UTC</div>
+    <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> Chokepoint monitor &middot; auto-refreshed daily via GitHub Actions &middot; last updated 2026-09-19 20:02 UTC</div>
     <h1 class="title">Hormuz Watch</h1>
     <p class="subhead">Daily vessel transits through the Strait of Hormuz, charted against Brent crude, over a rolling 77-day window. Roughly a fifth of the world's oil passes through this 33&nbsp;km gap between Iran and Oman &mdash; when transits fall, this is where it shows first.</p>
 
@@ -318,6 +318,8 @@
     </ul>
     <h3>Notes</h3>
     <p>Transit counts are IMF PortWatch's AIS-based estimate of vessels passing through the chokepoint boundary that day, across all cargo types (tanker, dry bulk, container, general cargo, ro-ro). "Tankers" is the subset identified as tanker-type vessels. Correlation is computed on the window shown, price vs. total transits, and is not evidence of causation on its own.</p>
+    <h3>How I built this</h3>
+    <p>I put this together to see whether Hormuz traffic and oil price actually move together, day by day, rather than just arguing about it.</p>
   </footer>
 
 </div>
@@ -427,7 +429,7 @@
   function fmtBucketLabel(view, iso){
     if(view==="month"){
       var d=new Date(iso+"T00:00:00Z");
-      return d.toLocaleDateString("en-US",{month:"short",year:"2-digit",timeZone:"UTC"});
+      return d.toLocaleDateString("en-US",{month:"short",year:"numeric",timeZone:"UTC"});
     }
     return fmtDate(iso);
   }
